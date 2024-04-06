@@ -1,0 +1,48 @@
+body{
+    margin: 0;
+    background-color: #5877a8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;/*100% высоты нашего экрана*/
+    width: 100%;
+
+}
+
+.container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    gap: 50px;
+}
+
+.centering{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.imgCart{
+    background-image: url(./img/852ffe96161347.5ea83b4dcd691.png);
+    width: 350px;
+    height: 240px;
+    background-size: cover;
+    border: 5px solid white;
+
+}
+
+.imgCartCenter{
+    background-image: url(./img/852ffe96161347.5ea83b4dcd691.png);
+    width: 800px;
+    height: 520px;
+    background-size: cover;
+    border: 8px solid white;
+
+}
