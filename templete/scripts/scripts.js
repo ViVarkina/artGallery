@@ -7,57 +7,114 @@
 //
 // document.body.append(createContainer())
 
-const divLeftElement=()=>{
-    const divLeftElement = document.createElement("div")
-    divLeftElement.classList.add("container")
-    divLeftElement.id = "divContainerLeft"
-    return divLeftElement
-}
-const divCenterElement=()=>{
-    const newCenterDiv = document.createElement("div")
-    newCenterDiv.classList.add("centering")
-    newCenterDiv.classList.add("container")
-    newCenterDiv.id = "divContainerCenter"
-    return newCenterDiv
-}
 
-// const sectionsDivCenter=()=>{
-//     const
-// }
+import {imgSources} from "../img/index.js";
 
-const divRightElement=()=>{
-    const divRightElement = document.createElement("div")
-    divRightElement.classList.add("container")
-    divRightElement.id = "divContainerRight"
-    return divRightElement
+
+const imgContainer=(id, classList)=>{
+    const container = document.createElement("div")
+    container.classList.add("container")
+    // classList.forEach((elem)=>{
+    //     container.classList.add(elem)
+    // })
+    container.classList.add(classList)
+    container.id = id
+    return container
 }
 
 
-document.body.append(divLeftElement())
-document.body.append(divCenterElement())
-document.body.append(divRightElement())
+document.body.append(imgContainer("divContainerLeft"))
+document.body.append(imgContainer("divContainerCenter", ["centering"]))
+document.body.append(imgContainer("divContainerRight"))
 
 
-const imgCarts =()=>{
-    const imgCart = document.createElement("div")
-    imgCart.classList.add("imgCart")
+const createCart =(src, className="imgCart")=>{
+    const imgCart = document.createElement("img")
+    imgCart.src= src
+    imgCart.classList.add(className)
+    imgCart.classList.add("card")
     return imgCart
 }
 
-const imgCartsCenter =()=>{
-    const imgCartCenter = document.createElement("div")
-    imgCartCenter.classList.add("imgCartCenter")
-    return imgCartCenter
+
+document.getElementById("divContainerLeft").append(createCart(imgSources.img1))
+document.getElementById("divContainerLeft").append(createCart(imgSources.img2))
+document.getElementById("divContainerLeft").append(createCart(imgSources.img3))
+
+document.getElementById("divContainerRight").append(createCart(imgSources.img4))
+document.getElementById("divContainerRight").append(createCart(imgSources.img5))
+document.getElementById("divContainerRight").append(createCart(imgSources.img6))
+
+document.getElementById("divContainerCenter").append(createCart(imgSources.img7, "imgCartCenter"))
+document.getElementById("divContainerCenter").append(createCart(imgSources.img8))
+document.getElementById("divContainerCenter").append(createCart(imgSources.img9))
+
+const cards = document.getElementsByClassName("card")
+
+const closeModalWindow=(overlay)=>{
+    console.log("закрыли")
+    //удаляем эелемент
+    overlay.remove()
 }
 
-document.getElementById("divContainerLeft").append(imgCarts())
-document.getElementById("divContainerLeft").append(imgCarts())
-document.getElementById("divContainerLeft").append(imgCarts())
+const setNextImage=(even, image)=>{
+    console.log("клик в лево")
+    console.log(even.target.id)
+    console.log(image)
+    const imgArr = Object.values(imgSources)
+    let index = +(Math.random()*10).toFixed(0)
+    if(index >8){
+        index = 8
+    }
+    image.src=imgArr[index]
 
-document.getElementById("divContainerRight").append(imgCarts())
-document.getElementById("divContainerRight").append(imgCarts())
-document.getElementById("divContainerRight").append(imgCarts())
+}
+const opeModalWindow=(even)=>{
+    console.log("клик", even.target)
+    //воздаем задний фон модал окна
+    const overlay = document.createElement("div")
+    overlay.classList.add("modalOverlay")
 
-document.getElementById("divContainerCenter").append(imgCartsCenter())
-document.getElementById("divContainerCenter").append(imgCarts())
-document.getElementById("divContainerCenter").append(imgCarts())
+    //создаем тело модалки
+    const modalBody = document.createElement("div")
+    modalBody.classList.add("modalBody")
+
+    //кнопка закрытия
+    const closeButton = document.createElement("div")
+    closeButton.classList.add("closeButton")
+    closeButton.innerText = "x"
+    closeButton.id="closeModalWindowButton"
+    closeButton.addEventListener("click", ()=>{//передаем в функцию оргумент из другой функции(внутреней)
+        closeModalWindow(overlay)
+    })
+
+    //картинка в модалке
+    const image = document.createElement("img")
+    image.src= even.target.src
+    image.classList.add("modalBodyImg")
+    modalBody.append(image)
+
+    //кнопка перелистования
+    const nextImg = document.createElement("div")
+    nextImg.id = "next"
+    nextImg.classList.add("nextImg")
+    nextImg.innerText = ">"
+    nextImg.addEventListener("click",(even)=> setNextImage(even, image))
+    modalBody.append(nextImg)
+
+    //добавляем кнопку в окно модал
+    modalBody.append(closeButton)
+
+    // засунули тело в фон
+    overlay.append(modalBody)
+
+    // засунули все в боди
+    document.body.append(overlay)
+
+}
+console.log(cards)
+
+for (const card of cards) {
+    card.addEventListener("click", opeModalWindow)
+}
+

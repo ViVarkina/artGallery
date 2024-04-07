@@ -30,7 +30,7 @@ body{
 }
 
 .imgCart{
-    background-image: url(./img/852ffe96161347.5ea83b4dcd691.png);
+    background-image: url(img);
     width: 350px;
     height: 240px;
     background-size: cover;
@@ -39,10 +39,60 @@ body{
 }
 
 .imgCartCenter{
-    background-image: url(./img/852ffe96161347.5ea83b4dcd691.png);
+    background-image: url(img);
     width: 800px;
     height: 520px;
     background-size: cover;
     border: 8px solid white;
 
+}
+
+.modalOverlay{
+    position: fixed;
+    background-color: rgba(24, 28, 68, 0.64);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.modalBody{
+    position: relative;
+    width: 800px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.closeButton{
+    padding: 10px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border-radius: 6px;
+}
+
+.modalBodyImg{
+    width: inherit;
+    border-radius: inherit;
+}
+
+.nextImg{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    right: -50px;
+    top: 50%;
+    background-color: rgba(255, 255, 255, 0.82);
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
 }
