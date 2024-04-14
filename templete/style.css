@@ -81,7 +81,7 @@ body{
     border-radius: inherit;
 }
 
-.nextImg{
+.nextImg, .lastImg{
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -95,4 +95,9 @@ body{
     justify-content: center;
     align-items: center;
     color: #000000;
+}
+
+
+.lastImg{
+    right: 815px;
 }
